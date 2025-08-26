@@ -9,6 +9,20 @@ app = Flask(__name__)
 API_PUBLIC_KEY = os.environ.get("ENEDIS_PUBLIC_KEY", "1JbIJjWokMTCIcFb7ZzOqX_EJaYa")
 API_SECRET_KEY = os.environ.get("ENEDIS_SECRET_KEY", "1YGowjHfdhjSuqYvO9IeuMt5xIYa")
 
+# Page d'accueil de l'API
+@app.route("/", methods=["GET"])
+def home():
+    return jsonify({
+        "message": "API ENEDIS - Serveur HTTPS",
+        "version": "1.0",
+        "endpoints": {
+            "/": "Page d'accueil (GET)",
+            "/callback": "Endpoint pour recevoir les callbacks d'Enedis (POST)",
+            "/get_data": "Exemple de requête à l'API Enedis (GET)"
+        },
+        "status": "running"
+    })
+
 # Endpoint pour recevoir les callbacks d'Enedis
 @app.route("/callback", methods=["POST"])
 def callback():
