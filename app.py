@@ -2,12 +2,20 @@
 from flask import Flask, request, jsonify
 import requests
 import os
+from dotenv import load_dotenv
+
+# Charger les variables d'environnement depuis le fichier .env
+load_dotenv()
 
 app = Flask(__name__)
 
-# Tes clés Enedis
-API_PUBLIC_KEY = os.environ.get("ENEDIS_PUBLIC_KEY", "1JbIJjWokMTCIcFb7ZzOqX_EJaYa")
-API_SECRET_KEY = os.environ.get("ENEDIS_SECRET_KEY", "1YGowjHfdhjSuqYvO9IeuMt5xIYa")
+# Clés Enedis chargées depuis les variables d'environnement
+API_PUBLIC_KEY = os.environ.get("ENEDIS_PUBLIC_KEY")
+API_SECRET_KEY = os.environ.get("ENEDIS_SECRET_KEY")
+
+# Vérification que les clés sont bien définies
+if not API_PUBLIC_KEY or not API_SECRET_KEY:
+    raise ValueError("Les clés ENEDIS_PUBLIC_KEY et ENEDIS_SECRET_KEY doivent être définies dans les variables d'environnement")
 
 # Page d'accueil de l'API
 @app.route("/", methods=["GET"])
