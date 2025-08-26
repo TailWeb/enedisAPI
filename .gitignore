@@ -189,11 +189,10 @@ pids
 *.pid.lock
 
 # SSL certificates (keep them out of version control for security)
-# Uncomment if you want to exclude SSL certificates
-# *.pem
-# *.key
-# *.crt
-# *.csr
+*.pem
+*.key
+*.crt
+*.csr
 
 # Configuration files with sensitive data
 .env
